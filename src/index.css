@@ -35,6 +35,7 @@ body {
 #root {
   width: 100vw;
   height: 100vh;
+  height: 100dvh;
   display: flex;
   flex-direction: column;
 }
@@ -285,7 +286,7 @@ body {
 
 /* Result Card */
 .result-card-wrapper {
-  position: absolute;
+  position: fixed;
   bottom: 0;
   left: 0;
   right: 0;
@@ -520,7 +521,7 @@ body {
 
   .result-card-wrapper {
     padding: 12px;
-    padding-bottom: calc(32px + env(safe-area-inset-bottom, 0px));
+    padding-bottom: calc(48px + env(safe-area-inset-bottom, 0px));
   }
 
   .result-card {
