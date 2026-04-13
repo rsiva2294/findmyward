@@ -324,6 +324,12 @@ body {
   font-size: 14px;
 }
 
+.result-card-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 8px;
+}
+
 .ward-name {
   font-size: 24px;
   font-weight: 800;
@@ -514,16 +520,30 @@ body {
 
   .result-card-wrapper {
     padding: 12px;
-    padding-bottom: calc(12px + env(safe-area-inset-bottom, 0px));
+    padding-bottom: calc(20px + env(safe-area-inset-bottom, 0px));
   }
 
   .result-card {
     padding: 16px;
-    gap: 12px;
+    gap: 10px;
     border-radius: 16px;
-    max-height: 75vh;
+    max-height: 80vh;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .result-card-actions {
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+  }
+
+  .action-btn {
+    width: 100%;
+    padding: 12px;
+    font-size: 14px;
   }
 
   .street-info-box {
