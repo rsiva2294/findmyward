@@ -46,20 +46,7 @@ const WardResultCard = ({ wardFeature, clearSelection, matchedStreet }) => {
       </div>
 
       {matchedStreet && (
-        <div style={{
-          marginTop: '6px', 
-          padding: '10px 12px', 
-          backgroundColor: '#EFF6FF', 
-          borderLeft: '4px solid #3B82F6',
-          borderRadius: '4px',
-          color: '#1E40AF',
-          fontSize: '13px',
-          fontWeight: '500',
-          display: 'flex',
-          alignItems: 'center',
-          gap: '8px',
-          lineHeight: '1.4'
-        }}>
+        <div className="street-info-box">
           <Info size={18} style={{ flexShrink: 0 }} />
           <span>{matchedStreet}</span>
         </div>

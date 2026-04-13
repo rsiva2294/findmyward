@@ -164,6 +164,7 @@ body {
   border: 1px solid var(--border);
   width: 40px;
   height: 40px;
+  flex-shrink: 0; /* Prevent squeezing */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -366,6 +367,21 @@ body {
   border-color: #d1d5db;
 }
 
+.street-info-box {
+  margin-top: 6px; 
+  padding: 10px 12px; 
+  background-color: #EFF6FF; 
+  border-left: 4px solid #3B82F6;
+  border-radius: 4px;
+  color: #1E40AF;
+  font-size: 13px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  line-height: 1.4;
+}
+
 /* Messages */
 .message-card {
   pointer-events: auto;
@@ -471,4 +487,68 @@ body {
   height: 12px;
   background: var(--border);
   margin: 0 4px;
+}
+
+/* Mobile Optimizations */
+@media (max-width: 480px) {
+  .top-bar {
+    top: 12px;
+    left: 12px;
+    right: 12px;
+  }
+
+  .search-container {
+    padding: 2px 6px 2px 14px;
+    gap: 8px;
+  }
+
+  .search-input {
+    font-size: 14px;
+    padding: 8px 0;
+  }
+
+  .locate-btn {
+    width: 36px;
+    height: 36px;
+  }
+
+  .result-card-wrapper {
+    padding: 12px;
+    padding-bottom: calc(12px + env(safe-area-inset-bottom, 0px));
+  }
+
+  .result-card {
+    padding: 16px;
+    gap: 12px;
+    border-radius: 16px;
+    max-height: 75vh;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .street-info-box {
+    padding: 8px 10px;
+    font-size: 12px;
+    gap: 6px;
+  }
+
+  .ward-name {
+    font-size: 19px;
+  }
+
+  .zone-name {
+    font-size: 13px;
+  }
+
+  .dev-credit {
+    bottom: 12px;
+    left: 12px;
+    padding: 6px 12px;
+    font-size: 10px;
+  }
+
+  .action-btn {
+    padding: 8px;
+    font-size: 13px;
+  }
 }

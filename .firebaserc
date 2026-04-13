@@ -1,0 +1,15 @@
+{
+  "projects": {
+    "default": "studio-4390255530-56b97"
+  },
+  "targets": {
+    "studio-4390255530-56b97": {
+      "hosting": {
+        "findmyward": [
+          "madurai-findmyward"
+        ]
+      }
+    }
+  },
+  "etags": {}
+}
