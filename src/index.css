@@ -520,7 +520,7 @@ body {
 
   .result-card-wrapper {
     padding: 12px;
-    padding-bottom: calc(20px + env(safe-area-inset-bottom, 0px));
+    padding-bottom: calc(32px + env(safe-area-inset-bottom, 0px));
   }
 
   .result-card {
@@ -542,8 +542,9 @@ body {
 
   .action-btn {
     width: 100%;
-    padding: 12px;
+    padding: 10px;
     font-size: 14px;
+    min-height: 44px;
   }
 
   .street-info-box {
