@@ -1,7 +1,7 @@
 import React from 'react';
-import { Share2, MapPin, X, Info } from 'lucide-react';
+import { Share2, MapPin, X, Info, Phone } from 'lucide-react';
 
-const WardResultCard = ({ wardFeature, clearSelection, matchedStreet }) => {
+const WardResultCard = ({ wardFeature, clearSelection, matchedStreet, onShowContacts }) => {
   if (!wardFeature || !wardFeature.properties) return null;
 
   const { ward_no, ward_name, zone, ward_code } = wardFeature.properties;
@@ -56,6 +56,14 @@ const WardResultCard = ({ wardFeature, clearSelection, matchedStreet }) => {
         <button className="action-btn" onClick={handleShare}>
           <Share2 size={18} />
           Share finding
+        </button>
+        <button 
+          className="action-btn" 
+          onClick={onShowContacts}
+          style={{ background: 'var(--primary)', color: 'white', borderColor: 'var(--primary)' }}
+        >
+          <Phone size={18} />
+          Ward Contacts
         </button>
       </div>
     </div>

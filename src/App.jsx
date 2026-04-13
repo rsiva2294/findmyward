@@ -6,7 +6,10 @@ import WardSearch from './components/WardSearch';
 import { Navigation } from 'lucide-react';
 import wardDataUrl from './assets/madurai_wards.geojson?url';
 import localityDataUrl from './assets/locality.json?url';
+import contactsDataUrl from './assets/madurai_all_zones.json?url';
 import { flattenLocalityData } from './utils/searchHelper';
+import WardContactsBottomSheet from './components/WardContactsBottomSheet';
+import { Phone } from 'lucide-react';
 
 function App() {
   const [geojsonData, setGeojsonData] = useState(null);
@@ -19,6 +22,11 @@ function App() {
   const [matchedStreetContext, setMatchedStreetContext] = useState(null); // Context when street is selected
   const [loading, setLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState(null);
+
+  // New states for Ward Contacts
+  const [allContactsData, setAllContactsData] = useState(null);
+  const [showContacts, setShowContacts] = useState(false);
+  const [currentContacts, setCurrentContacts] = useState({ ward: null, zone: null });
 
   useEffect(() => {
     // Load GeoJSON data
@@ -41,6 +49,16 @@ function App() {
       })
       .catch(err => {
         console.error("Error loading locality data", err);
+      });
+
+    // Load All Zones/Contacts data
+    fetch(contactsDataUrl)
+      .then(res => res.json())
+      .then(data => {
+        setAllContactsData(data);
+      })
+      .catch(err => {
+        console.error("Error loading contact data", err);
       });
   }, []);
 
@@ -74,6 +92,7 @@ function App() {
       setMatchedStreetContext(null);
       setErrorMsg("Location not within any mapped ward.");
     }
+    setShowContacts(false);
   }, [geojsonData]);
 
   // GPS Action
@@ -159,6 +178,7 @@ function App() {
       setDetectedWard(null);
       setMatchedStreetContext(null);
     }
+    setShowContacts(false);
   };
 
   const clearSelection = () => {
@@ -166,6 +186,33 @@ function App() {
     setUserLocation(null);
     setErrorMsg(null);
     setMatchedStreetContext(null);
+    setShowContacts(false);
+  };
+
+  const handleShowContacts = () => {
+    if (!detectedWard || !allContactsData) return;
+
+    const wardNo = Number(detectedWard.properties.ward_no);
+    let foundWard = null;
+    let foundZone = null;
+
+    // Search through all zones to find the matching ward
+    for (const zoneItem of allContactsData.zones) {
+      const ward = zoneItem.wards.find(w => Number(w.ward_no) === wardNo);
+      if (ward) {
+        foundWard = ward;
+        foundZone = zoneItem.zone;
+        break;
+      }
+    }
+
+    if (foundWard) {
+      setCurrentContacts({ ward: foundWard, zone: foundZone });
+      setShowContacts(true);
+    } else {
+      console.warn("Contacts not found for ward:", wardNo);
+      alert("Contact information not available for this ward.");
+    }
   };
 
   return (
@@ -206,6 +253,7 @@ function App() {
             wardFeature={detectedWard}
             clearSelection={clearSelection}
             matchedStreet={matchedStreetContext}
+            onShowContacts={handleShowContacts}
           />
         )}
 
@@ -215,6 +263,19 @@ function App() {
           </div>
         )}
       </div>
+
+      {/* Ward Contacts Bottom Sheet Overlay */}
+      {detectedWard && allContactsData && (
+        <WardContactsBottomSheet 
+          isOpen={showContacts}
+          onClose={() => setShowContacts(false)}
+          wardContacts={currentContacts.ward}
+          zoneContacts={currentContacts.zone}
+          wardName={detectedWard.properties.ward_name}
+          wardNo={detectedWard.properties.ward_no}
+          zoneName={currentContacts.zone?.zone_name}
+        />
+      )}
     </div>
   );
 }
