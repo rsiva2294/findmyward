@@ -535,16 +535,23 @@ body {
   }
 
   .result-card-actions {
-    flex-direction: column;
+    flex-direction: row;
     gap: 8px;
     width: 100%;
   }
 
   .action-btn {
-    width: 100%;
-    padding: 10px;
-    font-size: 14px;
+    flex: 1;
+    padding: 10px 4px;
+    font-size: 13px;
     min-height: 44px;
+    white-space: nowrap;
+    gap: 4px;
+  }
+
+  .action-btn svg {
+    width: 16px;
+    height: 16px;
   }
 
   .street-info-box {
