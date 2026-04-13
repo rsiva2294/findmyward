@@ -9,7 +9,9 @@ import localityDataUrl from './assets/locality.json?url';
 import contactsDataUrl from './assets/madurai_all_zones.json?url';
 import { flattenLocalityData } from './utils/searchHelper';
 import WardContactsBottomSheet from './components/WardContactsBottomSheet';
-import { Phone } from 'lucide-react';
+import HeadOfficeBottomSheet from './components/HeadOfficeBottomSheet';
+import { Phone, Building2 } from 'lucide-react';
+import headOfficeDataUrl from './assets/head_office.json?url';
 
 function App() {
   const [geojsonData, setGeojsonData] = useState(null);
@@ -25,7 +27,9 @@ function App() {
 
   // New states for Ward Contacts
   const [allContactsData, setAllContactsData] = useState(null);
+  const [headOfficeData, setHeadOfficeData] = useState(null);
   const [showContacts, setShowContacts] = useState(false);
+  const [showHeadOffice, setShowHeadOffice] = useState(false);
   const [currentContacts, setCurrentContacts] = useState({ ward: null, zone: null });
 
   useEffect(() => {
@@ -59,6 +63,16 @@ function App() {
       })
       .catch(err => {
         console.error("Error loading contact data", err);
+      });
+
+    // Load Head Office data
+    fetch(headOfficeDataUrl)
+      .then(res => res.json())
+      .then(data => {
+        setHeadOfficeData(data);
+      })
+      .catch(err => {
+        console.error("Error loading head office data", err);
       });
   }, []);
 
@@ -236,6 +250,16 @@ function App() {
 
 
 
+      {/* Floating Action Button for Head Office */}
+      <button 
+        className="head-office-fab animate-fade-in" 
+        onClick={() => setShowHeadOffice(true)}
+        title="Corporation Head Office Contacts"
+      >
+        <Building2 size={24} />
+        <span className="fab-label">HQ</span>
+      </button>
+
       {/* Main Map */}
       <div className="map-container">
         <MapWrapper
@@ -277,6 +301,13 @@ function App() {
           zoneName={currentContacts.zone?.zone_name}
         />
       )}
+
+      {/* Head Office Bottom Sheet */}
+      <HeadOfficeBottomSheet 
+        isOpen={showHeadOffice}
+        onClose={() => setShowHeadOffice(false)}
+        data={headOfficeData}
+      />
     </div>
   );
 }

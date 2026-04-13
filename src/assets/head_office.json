@@ -1,0 +1,145 @@
+{
+  "head_office": {
+    "commissioner": {
+      "name": "Tmt. Chitra Vijayan IAS",
+      "phone": "+91 452 2545333",
+      "email": "commr.madurai@tn.gov.in"
+    },
+    "deputy_commissioners": [
+      {
+        "name": "Tmt. S. Chitra",
+        "phone": "+91 9498748700",
+        "email": "dcmdcorp@gmail.com"
+      },
+      {
+        "name": "Thiru. R. Jainulaptheen M.Sc",
+        "phone": "+91 9498749011",
+        "email": "dcmdcorp1@gmail.com"
+      }
+    ],
+    "assistant_commissioners_by_zone": [
+      {
+        "zone": "East Zone-I",
+        "name": "Thiru. R. Ravikumar (I/C)",
+        "landline": "+91 452 2310011",
+        "mobile": "+91 9498749001"
+      },
+      {
+        "zone": "North Zone-II",
+        "name": "Thiru. R. Ravikumar",
+        "landline": "+91 452 2310022",
+        "mobile": "+91 9498749002"
+      },
+      {
+        "zone": "Central Zone-III",
+        "name": "Thiru. S. Prabhakaran",
+        "landline": "+91 452 2310033",
+        "mobile": "+91 9498749003"
+      },
+      {
+        "zone": "South Zone-IV",
+        "name": "Thiru. Manimaran",
+        "landline": "+91 452 2310044",
+        "mobile": "+91 9498749004"
+      },
+      {
+        "zone": "West Zone-V",
+        "name": "Tmt. N. Sridevi",
+        "landline": "+91 452 2310055",
+        "mobile": "+91 9498749005"
+      }
+    ],
+    "officials": [
+      {
+        "name": "B.V. Babu",
+        "designation": "Chief Engineer",
+        "phone": "+91 9498748719"
+      },
+      {
+        "name": "Dr. Abishek",
+        "designation": "Assistant City Health Officer",
+        "phone": "+91 9498749066"
+      },
+      {
+        "name": "Thiru. S. Venkataramanan",
+        "designation": "Assistant Commissioner (Accounts)",
+        "phone": "+91 9498748707"
+      },
+      {
+        "name": "Thiru. G. Balaji (I/C)",
+        "designation": "Assistant Commissioner (Revenue)",
+        "phone": "+91 9498748706"
+      },
+      {
+        "name": "Tmt. R. Arunachalam",
+        "designation": "Assistant Commissioner (Personnel)",
+        "phone": "+91 9498748705"
+      },
+      {
+        "name": "Tmt. K. Malathi",
+        "designation": "Town Planning",
+        "phone": "+91 9498748908"
+      },
+      {
+        "name": "Thiru. S. Subramanian (I/C)",
+        "designation": "Executive Engineer (Vehicle, Streetlight, UGSS, UG Cable Zone I & II)",
+        "phone": "+91 9498748926"
+      },
+      {
+        "name": "Thiru. Sundararaj",
+        "designation": "Executive Engineer (AMRUT, ARSAS UGSS Zone III & IV)",
+        "phone": "+91 9498748906"
+      },
+      {
+        "name": "Tmt. Bakiya Lakshmi",
+        "designation": "Executive Engineer (AMRUT, ARSAS UGSS Zone V)",
+        "phone": "+91 9498748712"
+      },
+      {
+        "name": "Thiru. K. Jaisankar",
+        "designation": "Corporation Education Officer",
+        "phone": "+91 9498748704"
+      },
+      {
+        "name": "Thiru. Maheswaran",
+        "designation": "Public Relation Officer",
+        "phone": "+91 9498748708"
+      },
+      {
+        "name": "Tmt. R. Chitra",
+        "designation": "Council Secretary",
+        "phone": "+91 9498748710"
+      },
+      {
+        "name": "Tmt. Siva Backiyam",
+        "designation": "Law Officer",
+        "phone": "+91 9498748709"
+      },
+      {
+        "name": "Ms. Subha",
+        "designation": "Assistant Engineer - HQ",
+        "phone": "+91 9498748920"
+      },
+      {
+        "name": "Thiru. P. Parthasarathy (I/C)",
+        "designation": "Revenue Officer",
+        "phone": "+91 9498749109"
+      },
+      {
+        "name": "Dr. K. Ragu",
+        "designation": "Veterinary Doctor",
+        "phone": "+91 9498747935"
+      },
+      {
+        "name": "Mrs. Thilagavathi",
+        "designation": "Maternal Child Health Officer",
+        "phone": "+91 9498748713"
+      },
+      {
+        "name": "Thiru. Sureshkumar",
+        "designation": "Birth and Death Sanitary Inspector",
+        "phone": "+91 8667385987"
+      }
+    ]
+  }
+}

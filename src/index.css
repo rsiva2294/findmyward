@@ -594,6 +594,57 @@ body {
   }
 }
 
+/* Floating Action Button for Head Office */
+.head-office-fab {
+  position: fixed;
+  right: 24px;
+  bottom: 120px;
+  width: 60px;
+  height: 60px;
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 1000;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  color: var(--primary);
+  pointer-events: auto;
+}
+
+.head-office-fab:hover {
+  transform: translateY(-4px);
+  background: var(--primary);
+  color: white;
+  box-shadow: 0 12px 30px rgba(79, 70, 229, 0.4);
+}
+
+.head-office-fab .fab-label {
+  font-size: 9px;
+  font-weight: 800;
+  margin-top: 2px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+@media (max-width: 480px) {
+  .head-office-fab {
+    right: 16px;
+    bottom: 110px;
+    width: 52px;
+    height: 52px;
+    border-radius: 14px;
+  }
+  
+  .head-office-fab .fab-label {
+    font-size: 8px;
+  }
+}
+
 /* Ward Contacts Bottom Sheet */
 .contacts-overlay {
   position: fixed;
