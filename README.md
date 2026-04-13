@@ -1,22 +1,27 @@
 # 🗺️ Madurai: FindMyWard
 
-A premium, interactive web application covering all 100 wards of the Madurai Corporation. This tool provides citizens and visitors with an easy way to identify municipal wards using geographic data.
+A premium, interactive web application and civic tool covering all 100 wards of the Madurai Corporation. This application empowers citizens to identify their municipal wards and instantly connect with relevant officials.
 
-**Project Context**: This application is being developed to replace/modernize the "ZONE FINDER" tool on [Madurai Guide](https://maduraiguide.in/).
+**Project Context**: This application is the modern successor to the "ZONE FINDER" tool on [Madurai Guide](https://maduraiguide.in/).
 
 ![Madurai Ward Map](src/assets/hero.png)
 
-## ✨ Features
+## ✨ Global Features
 
-- **📍 Find My Ward (GPS)**: Instant detection of your current ward using high-accuracy geolocation.
-- **🔍 Smart Search**: Search through thousands of streets and localities in Madurai with real-time suggestions.
+- **📍 Instant Ward Detection (GPS)**: High-accuracy geolocation to find your ward in one tap.
+- **📞 Ward Contacts Directory**: Access a direct directory of officials for every ward, including:
+  - **Councillor**: Direct political representation.
+  - **Sanitary Dept**: Inspectors and Supervisors for garbage/cleanliness issues.
+  - **Engineering Dept**: AE/JE and Skilled Assistants for road and water repairs.
+  - **Revenue Dept**: Bill Collectors for tax queries.
+  - **Zone Office**: High-level officials for escalation.
+- **🧹 Smart Intent Filtering**: Quick-action pills (Garbage, Road, Water, Tax, Zone) that instantly filter the directory to what you need.
+- **🔍 Intelligent Search**: Search through 30,000+ streets and localities in Madurai with real-time suggestions.
 - **🗺️ Interactive Map**: 
-  - Zone-based color coding for easy navigation.
-  - High-contrast ward labels.
-  - Interactive tooltips with ward numbers and names.
-  - Smooth zoom and boundaries restricted to Madurai city limits.
-- **📱 Responsive Design**: Fully optimized for mobile, tablet, and desktop viewing.
-- **⚡ Performance**: Built with Vite and React for near-instant load times and smooth animations.
+  - Zone-based color coding for easy identification.
+  - Interactive tooltips and high-contrast labels.
+  - Boundaries strictly restricted to Madurai city limits.
+- **📱 Mobile-First Experience**: Optimized for all devices with a premium "App-like" feel, including safe-area support and smooth animations.
 
 ## 🚀 Quick Start
 
@@ -24,8 +29,8 @@ A premium, interactive web application covering all 100 wards of the Madurai Cor
 
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/yourusername/madurai-findmyward.git
-   cd madurai-findmyward
+   git clone https://github.com/rsiva2294/findmyward.git
+   cd findmyward
    ```
 
 2. **Install dependencies**:
@@ -46,17 +51,18 @@ npm run build
 
 ## 🛠️ Built With
 
-- **[React](https://reactjs.org/)**: UI Framework
-- **[Leaflet](https://leafletjs.com/)**: Mapping Engine
-- **[Turf.js](https://turfjs.org/)**: Advanced Geospatial Analysis
-- **[Vite](https://vitejs.dev/)**: Frontend Tooling
-- **[Lucide React](https://lucide.dev/)**: Premium Icon Suite
+- **[React](https://reactjs.org/)**: UI Component Architecture
+- **[Leaflet](https://leafletjs.com/)**: Geospatial Mapping Engine
+- **[Turf.js](https://turfjs.org/)**: Spatial Intelligence & Point-in-Polygon logic
+- **[Vite](https://vitejs.dev/)**: High-performance Build Tooling
+- **[Lucide React](https://lucide.dev/)**: Premium UI Icons
 
-## 📖 How it Works
+## 📖 Civic Intelligence
 
-The application uses state-of-the-art spatial logic to map coordinates to municipal boundaries. 
-1. **Geometric Matching**: When you click the map or use GPS, the app performs a "Point-in-Polygon" test against GeoJSON ward boundaries.
-2. **Locality Index**: A flat JSON database links over 30,000+ street/locality entries to their respective ward numbers for precise manual searching.
+The application bridges the gap between geographic data and municipal action:
+1. **Spatial Mapping**: Uses GeoJSON boundaries to map coordinates to ward IDs.
+2. **Contact Linking**: Dynamically maps ward IDs to a comprehensive database of 600+ municipal officials.
+3. **Intent-Based UI**: Designed to help users solve problems (Garbage, Water, Roads) rather than just browsing raw data.
 
 ## 🤝 Contributing
 

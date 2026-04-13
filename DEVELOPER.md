@@ -14,9 +14,10 @@ madurai-findmyward/
 ├── src/
 │   ├── assets/             # Raw data files (GeoJSON, JSON)
 │   ├── components/         # React Components
-│   │   ├── MapWrapper.jsx      # Leaflet map implementation
-│   │   ├── WardSearch.jsx      # Search UI & autocomplete logic
-│   │   └── WardResultCard.jsx  # Dismissible result overlay
+│   │   ├── MapWrapper.jsx              # Leaflet map implementation
+│   │   ├── WardSearch.jsx              # Search UI & autocomplete logic
+│   │   ├── WardResultCard.jsx          # Dismissible result overlay
+│   │   └── WardContactsBottomSheet.jsx # Official contact directory & filtering
 │   ├── utils/              # Helper functions
 │   │   └── searchHelper.js     # Data flattening & indexing
 │   ├── App.jsx             # Main state orchestration
@@ -28,60 +29,59 @@ madurai-findmyward/
 
 ## 📊 Data Architecture
 
-The application relies on two primary data sources located in `src/assets/`:
+The application relies on three primary data sources located in `src/assets/`:
 
 ### 1. `madurai_wards.geojson`
 The source of truth for ward boundaries.
 - **Properties**: `ward_no`, `ward_name`, `zone`.
-- **Logic**: Used for spatial Point-in-Polygon testing and rendering map layers.
+- **Logic**: Used for spatial Point-in-Polygon testing.
 
 ### 2. `locality.json`
-A mapped index of streets/localities to ward numbers.
-- **Structure**: A nested object or array (flattened during initialization).
+A mapped index of 30,000+ streets/localities to ward numbers.
 - **Properties**: `locality_name`, `street_name`, `ward_no`.
-- **Normalization**: During indexing, ward numbers are normalized to `Number` types to ensure consistent matching with the GeoJSON features.
+
+### 3. `madurai_all_zones.json` [NEW]
+Official contact directory for all wards and zones.
+- **Wards**: Contains `councillor`, `sanitary`, `engineering`, and `bill_collector` details.
+- **Zones**: Contains high-level zone office officials.
+- **Schema Helper**: Some legacies entries in `councillor_name` contain embedded phone numbers with tabs; the parsing utility in `WardContactsBottomSheet` handles these dynamically.
 
 ## 🧠 Core Logic
 
 ### Spatial Search (GPS / Map Click)
-Uses **Turf.js** to determine which ward polygon contains a specific `[lat, lng]` coordinate.
-- **Method**: `turf.booleanPointInPolygon(point, feature)`
-- **Integration**: Handled in `App.jsx` via `findWardForPoint`.
+Uses **Turf.js** (`turf.booleanPointInPolygon`) to map `[lat, lng]` coordinates to ward features.
 
-### Manual Search (Locality/Street)
-The `locality.json` data is flattened into a searchable index on app mount.
-- **Helper**: `flattenLocalityData` in `utils/searchHelper.js`.
-- **Matching**: When a street is selected, the app looks up the `ward_no` and then finds the corresponding polygon in the GeoJSON data by numeric ID.
+### Ward Contact Mapping
+When a ward is detected, the app performs a lookup in `madurai_all_zones.json`:
+1. **Find Ward**: Matches `ward_no` from GeoJSON properties to the contacts database.
+2. **Resolve Zone**: Extracts the parent zone officials as a fallback.
+3. **Intent Filtering**: Uses a local state in `WardContactsBottomSheet` to filter officials by category (Garbage, Road, etc.), providing a solution-oriented user experience.
 
-### Map Rendering
-Implemented using **React-Leaflet**.
-- **Zone Coloring**: Wards are colored based on their `zone` property (East, North, Central, South, West) using a predefined color palette in `MapWrapper.jsx`.
-- **Dynamic Updates**: The `key` prop of the `GeoJSON` component is tied to the `detectedWard` ID to force a re-render and highlight the selected ward instantly.
+### Mobile UI Stacks & Viewports
+To handle mobile clipping:
+- **`fixed` Positioning**: The result card uses specific fixed positioning to avoid address bar shifts.
+- **`100dvh`**: The root container uses Dynamic Viewport Height for consistent mobile rendering.
+- **Stacked Actions**: Primary action buttons use a horizontal `flex` layout with optimized `13px` font sizing for narrow mobile screens.
 
 ## 🎨 Design System
 
-The application uses **Vanilla CSS** with a focus on premium aesthetics:
-- **Glassmorphism**: Translucent panels with blur effects for search and result cards.
-- **Animations**: CSS transitions and keyframes (`slide-up`, `fade-in`) for a "live" feel.
-- **Variables**: Centrally defined colors in `index.css` for easy theme Management.
+- **Glassmorphism**: Translucent panels with `backdrop-filter: blur(12px)`.
+- **Animations**: CSS keyframes (`sheetSlideUp`, `fadeIn`) for sheet interactions.
+- **SEO Support**: Comprehensive meta tags, OpenGraph, and Twitter Card metadata in `index.html`.
 
 ## 🛠️ Development Workflow
 
-1. **Adding New Localities**: 
-   Add entries to `src/assets/locality.json`. Ensure the `ward_no` matches an existing `ward_no` in the GeoJSON data.
+1. **Updating Contacts**: 
+   Modify `src/assets/madurai_all_zones.json`. Ensure the `ward_no` field remains an integer for exact matching.
    
-2. **Updating Ward Boundaries**: 
-   Replace `src/assets/madurai_wards.geojson`. If property names change (e.g., `ward_no` becomes `WardID`), update the matching logic in `App.jsx` and `MapWrapper.jsx`.
-
-3. **Styling Components**: 
-   Prefer modifying `index.css` or `App.css` using the existing variable system to maintain visual harmony.
+2. **Feature Icons**: 
+   Use the **Lucide React** suite. Import new icons into `WardContactsBottomSheet.jsx` for category mapping.
 
 ## 🧪 Testing
 
-Currently, testing is manual. When making changes to the search logic:
-1. Verify GPS detection in a known location.
-2. Search for a street (e.g., "Anna Nagar") and ensure the map zooms to the correct ward.
-3. Click a ward polygon directly and verify the details in the result card.
+1. **SEO Validation**: Use tools like "SEO Meta in 1 Click" to verify og-tags.
+2. **Mobile Viewport**: Test on Chrome DevTools using "iPhone SE" (narrowest) to verify button alignment.
+3. **Contact Parsing**: Verify that names with embedded tabs/phones are cleaned correctly in the UI.
 
 ---
 

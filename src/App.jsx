@@ -217,6 +217,7 @@ function App() {
 
   return (
     <div className="app-container">
+      <h1 className="sr-only">Madurai Corporation Ward Finder & Official Contacts</h1>
       {/* Search Bar */}
       <div className="top-bar animate-slide-up">
         <WardSearch 
