@@ -904,3 +904,22 @@ body {
     align-items: center;
   }
 }
+
+/* Political Representation Styles */
+.reps-container { display: flex; flex-direction: column; gap: 20px; padding: 20px 0; }
+.rep-card { background: white; border-radius: 16px; padding: 20px; border: 1px solid var(--border); box-shadow: var(--shadow-sm); transition: transform 0.2s; }
+.rep-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+.rep-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; gap: 12px; }
+.rep-type { font-size: 11px; font-weight: 800; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; display: block; margin-bottom: 4px; }
+.rep-name { font-size: 18px; font-weight: 800; color: var(--text-main); line-height: 1.2; }
+.rep-party-badge { padding: 4px 10px; border-radius: 6px; color: white; font-size: 11px; font-weight: 800; white-space: nowrap; }
+.rep-constituency { display: flex; align-items: center; gap: 6px; font-size: 13px; color: var(--text-muted); font-weight: 500; margin-bottom: 16px; }
+.rep-actions { display: flex; gap: 10px; }
+.rep-action-btn { flex: 1; display: flex; align-items: center; justify-content: center; gap: 8px; padding: 10px; border-radius: 10px; text-decoration: none; font-size: 14px; font-weight: 600; transition: all 0.2s; }
+.rep-action-btn.call { background: var(--primary); color: white; }
+.rep-action-btn.email { background: white; color: var(--primary); border: 1px solid var(--primary); }
+.rep-action-btn:hover { opacity: 0.9; transform: scale(1.02); }
+.rep-action-btn.disabled { background: var(--bg-color); color: var(--text-muted); border: 1px solid var(--border); cursor: not-allowed; }
+.rep-info-note { display: flex; align-items: center; gap: 8px; font-size: 11px; color: var(--text-muted); background: #f1f5f9; padding: 12px; border-radius: 8px; line-height: 1.4; border: 1px dashed var(--border); }
+.no-data-msg { text-align: center; padding: 40px 20px; color: var(--text-muted); font-size: 14px; font-weight: 500; }
+.reps-sheet { border-top: 5px solid var(--primary); }

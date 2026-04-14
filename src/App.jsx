@@ -12,6 +12,10 @@ import WardContactsBottomSheet from './components/WardContactsBottomSheet';
 import HeadOfficeBottomSheet from './components/HeadOfficeBottomSheet';
 import { Phone, Building2 } from 'lucide-react';
 import headOfficeDataUrl from './assets/head_office.json?url';
+import acDataUrl from './assets/madurai_ac.geojson?url';
+import pcDataUrl from './assets/madurai_pc.geojson?url';
+import repsDataUrl from './assets/representatives.json?url';
+import RepresentativesBottomSheet from './components/RepresentativesBottomSheet';
 
 function App() {
   const [geojsonData, setGeojsonData] = useState(null);
@@ -31,6 +35,13 @@ function App() {
   const [showContacts, setShowContacts] = useState(false);
   const [showHeadOffice, setShowHeadOffice] = useState(false);
   const [currentContacts, setCurrentContacts] = useState({ ward: null, zone: null });
+
+  // Political states
+  const [acData, setAcData] = useState(null);
+  const [pcData, setPcData] = useState(null);
+  const [repsData, setRepsData] = useState(null);
+  const [showReps, setShowReps] = useState(false);
+  const [selectedReps, setSelectedReps] = useState({ mla: null, mp: null });
 
   useEffect(() => {
     // Load GeoJSON data
@@ -74,6 +85,24 @@ function App() {
       .catch(err => {
         console.error("Error loading head office data", err);
       });
+
+    // Load AC data
+    fetch(acDataUrl)
+      .then(res => res.json())
+      .then(data => setAcData(data))
+      .catch(err => console.error("Error loading AC data", err));
+
+    // Load PC data
+    fetch(pcDataUrl)
+      .then(res => res.json())
+      .then(data => setPcData(data))
+      .catch(err => console.error("Error loading PC data", err));
+
+    // Load Representatives data
+    fetch(repsDataUrl)
+      .then(res => res.json())
+      .then(data => setRepsData(data))
+      .catch(err => console.error("Error loading reps data", err));
   }, []);
 
   // Spatial logic - find by GPS
@@ -229,6 +258,54 @@ function App() {
     }
   };
 
+  const findRepsForWard = useCallback((wardFeature) => {
+    if (!wardFeature || !acData || !pcData || !repsData) return;
+
+    // Use center of mass for spatial linking to AC/PC
+    try {
+      const center = turf.centerOfMass(wardFeature);
+      const pt = turf.point(center.geometry.coordinates);
+
+      let foundAC = null;
+      let foundPC = null;
+
+      // 1. Find AC
+      turf.featureEach(acData, (feature) => {
+        if (turf.booleanPointInPolygon(pt, feature)) {
+          foundAC = feature;
+        }
+      });
+
+      // 2. Find PC
+      turf.featureEach(pcData, (feature) => {
+        if (turf.booleanPointInPolygon(pt, feature)) {
+          foundPC = feature;
+        }
+      });
+
+      if (foundAC && foundPC) {
+        const ac_no = Number(foundAC.properties.ac_no);
+        const pc_no = Number(foundPC.properties.pc_no);
+
+        const mla = repsData.assembly_constituencies.find(a => Number(a.ac_no) === ac_no);
+        const mp = repsData.parliamentary_constituencies.find(p => Number(p.pc_no) === pc_no);
+
+        setSelectedReps({ mla, mp });
+        setShowReps(true);
+      } else {
+        alert("Political boundary mapping not found for this location.");
+      }
+    } catch (e) {
+      console.error("Error in representative mapping", e);
+    }
+  }, [acData, pcData, repsData]);
+
+  const handleShowReps = () => {
+    if (detectedWard) {
+      findRepsForWard(detectedWard);
+    }
+  };
+
   return (
     <div className="app-container">
       <h1 className="sr-only">Madurai Corporation Ward Finder & Official Contacts</h1>
@@ -264,6 +341,8 @@ function App() {
       <div className="map-container">
         <MapWrapper
           geojsonData={geojsonData}
+          acData={acData}
+          pcData={pcData}
           userLocation={userLocation}
           focusLocation={focusLocation}
           detectedWard={detectedWard}
@@ -279,6 +358,7 @@ function App() {
             clearSelection={clearSelection}
             matchedStreet={matchedStreetContext}
             onShowContacts={handleShowContacts}
+            onShowReps={handleShowReps}
           />
         )}
 
@@ -307,6 +387,14 @@ function App() {
         isOpen={showHeadOffice}
         onClose={() => setShowHeadOffice(false)}
         data={headOfficeData}
+      />
+
+      {/* Political Representatives Bottom Sheet */}
+      <RepresentativesBottomSheet 
+        isOpen={showReps}
+        onClose={() => setShowReps(false)}
+        mla={selectedReps.mla}
+        mp={selectedReps.mp}
       />
     </div>
   );

@@ -1,7 +1,7 @@
 import React from 'react';
-import { Share2, MapPin, X, Info, Phone } from 'lucide-react';
+import { Share2, MapPin, X, Info, Phone, User } from 'lucide-react';
 
-const WardResultCard = ({ wardFeature, clearSelection, matchedStreet, onShowContacts }) => {
+const WardResultCard = ({ wardFeature, clearSelection, matchedStreet, onShowContacts, onShowReps }) => {
   if (!wardFeature || !wardFeature.properties) return null;
 
   const { ward_no, ward_name, zone, ward_code } = wardFeature.properties;
@@ -53,9 +53,9 @@ const WardResultCard = ({ wardFeature, clearSelection, matchedStreet, onShowCont
       )}
 
       <div className="result-card-actions" style={{ marginTop: matchedStreet ? '8px' : '12px' }}>
-        <button className="action-btn" onClick={handleShare}>
-          <Share2 size={18} />
-          Share finding
+        <button className="action-btn" onClick={onShowReps}>
+          <User size={18} />
+          Politicians
         </button>
         <button 
           className="action-btn" 
@@ -66,6 +66,15 @@ const WardResultCard = ({ wardFeature, clearSelection, matchedStreet, onShowCont
           Ward Contacts
         </button>
       </div>
+      
+      <button 
+        className="action-btn" 
+        onClick={handleShare} 
+        style={{ width: '100%', marginTop: '4px', fontSize: '12px', minHeight: '36px', border: 'none', background: '#f8fafc' }}
+      >
+        <Share2 size={16} />
+        Share finding
+      </button>
     </div>
   );
 };

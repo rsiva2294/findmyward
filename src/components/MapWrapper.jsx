@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo } from 'react';
 import * as turf from '@turf/turf';
-import { MapContainer, TileLayer, GeoJSON, Marker, useMap, useMapEvents, Tooltip } from 'react-leaflet';
+import { MapContainer, TileLayer, GeoJSON, Marker, useMap, useMapEvents, Tooltip, LayersControl, LayerGroup } from 'react-leaflet';
+const { BaseLayer, Overlay } = LayersControl;
 import L from 'leaflet';
 
 const ZONE_COLORS = {
@@ -131,7 +132,7 @@ const ZoneLabels = ({ geojsonData }) => {
   ));
 };
 
-const MapWrapper = ({ geojsonData, userLocation, focusLocation, detectedWard, onMapClick }) => {
+const MapWrapper = ({ geojsonData, acData, pcData, userLocation, focusLocation, detectedWard, onMapClick }) => {
   // Default Madurai coordinates
   const maduraiCenter = [9.9252, 78.1198];
 
@@ -152,6 +153,24 @@ const MapWrapper = ({ geojsonData, userLocation, focusLocation, detectedWard, on
     };
   };
 
+  const acStyle = {
+    fillColor: '#10B981',
+    weight: 2,
+    opacity: 0.8,
+    color: '#059669',
+    fillOpacity: 0.1,
+    dashArray: '3'
+  };
+
+  const pcStyle = {
+    fillColor: '#F59E0B',
+    weight: 2,
+    opacity: 0.8,
+    color: '#D97706',
+    fillOpacity: 0.1,
+    dashArray: '5, 10'
+  };
+
   return (
     <MapContainer 
       center={maduraiCenter} 
@@ -167,29 +186,67 @@ const MapWrapper = ({ geojsonData, userLocation, focusLocation, detectedWard, on
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png"
       />
+
+      <LayersControl position="topright">
+        <Overlay checked name="Wards & Zones">
+          <LayerGroup>
+            {geojsonData && (
+              <GeoJSON 
+                data={geojsonData} 
+                style={wardStyle}
+                onEachFeature={(feature, layer) => {
+                  layer.bindTooltip(`
+                    <div style="font-family: Inter, sans-serif; padding: 4px;">
+                      <div style="font-weight: 800; color: var(--primary); font-size: 13px;">Ward ${feature.properties.ward_no}</div>
+                      <div style="font-weight: 600; color: var(--text-main); font-size: 12px; margin-top: 2px;">${feature.properties.ward_name}</div>
+                      <div style="font-weight: 500; color: var(--text-muted); font-size: 10px; margin-top: 2px;">${feature.properties.zone}</div>
+                    </div>
+                  `, { sticky: true, opacity: 0.95, className: 'custom-tooltip' });
+                }}
+                key={`geojson-${detectedWard ? detectedWard.properties?.ward_no : 'base'}`}
+              />
+            )}
+            <ZoneLabels geojsonData={geojsonData} />
+          </LayerGroup>
+        </Overlay>
+
+        <Overlay name="Assembly Constituencies">
+          {acData && (
+            <GeoJSON 
+              data={acData} 
+              style={acStyle}
+              onEachFeature={(feature, layer) => {
+                layer.bindTooltip(`
+                  <div style="font-family: Inter, sans-serif; padding: 4px;">
+                    <div style="font-weight: 800; color: #059669; font-size: 13px;">${feature.properties.ac_name}</div>
+                    <div style="font-weight: 600; color: var(--text-main); font-size: 11px;">AC No: ${feature.properties.ac_no}</div>
+                  </div>
+                `, { sticky: true });
+              }}
+            />
+          )}
+        </Overlay>
+
+        <Overlay name="Parliamentary Constituencies">
+          {pcData && (
+            <GeoJSON 
+              data={pcData} 
+              style={pcStyle}
+              onEachFeature={(feature, layer) => {
+                layer.bindTooltip(`
+                  <div style="font-family: Inter, sans-serif; padding: 4px;">
+                    <div style="font-weight: 800; color: #D97706; font-size: 13px;">${feature.properties.pc_name}</div>
+                    <div style="font-weight: 600; color: var(--text-main); font-size: 11px;">PC No: ${feature.properties.pc_no}</div>
+                  </div>
+                `, { sticky: true });
+              }}
+            />
+          )}
+        </Overlay>
+      </LayersControl>
       
       <ClickHandler onMapClick={onMapClick} />
       <MapFocusController focusLocation={focusLocation} />
-
-      <ZoneLabels geojsonData={geojsonData} />
-
-      {geojsonData && (
-        <GeoJSON 
-          data={geojsonData} 
-          style={wardStyle}
-          onEachFeature={(feature, layer) => {
-            layer.bindTooltip(`
-              <div style="font-family: Inter, sans-serif; padding: 4px;">
-                <div style="font-weight: 800; color: var(--primary); font-size: 13px;">Ward ${feature.properties.ward_no}</div>
-                <div style="font-weight: 600; color: var(--text-main); font-size: 12px; margin-top: 2px;">${feature.properties.ward_name}</div>
-                <div style="font-weight: 500; color: var(--text-muted); font-size: 10px; margin-top: 2px;">${feature.properties.zone}</div>
-              </div>
-            `, { sticky: true, opacity: 0.95, className: 'custom-tooltip' });
-          }}
-          // Change key to force re-render when selected ward changes (simplest way to update styles)
-          key={`geojson-${detectedWard ? detectedWard.properties?.ward_no : 'base'}`}
-        />
-      )}
 
       {userLocation && (
         <Marker position={userLocation} icon={createUserIcon()} />

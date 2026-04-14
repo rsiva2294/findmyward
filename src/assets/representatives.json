@@ -1,0 +1,113 @@
+{
+  "parliamentary_constituencies": [
+    {
+      "pc_no": 32,
+      "pc_name": "MADURAI",
+      "mp_name": "Thiru S. Venkatesan",
+      "party": "CPI(M)",
+      "contact": "9442462888",
+      "email": "",
+      "acs": [188, 189, 191, 192, 193, 194]
+    },
+    {
+      "pc_no": 33,
+      "pc_name": "THENI",
+      "mp_name": "Thiru THANGA TAMILSELVAN",
+      "party": "DMK",
+      "contact": "",
+      "email": "",
+      "acs": [190, 197]
+    },
+    {
+      "pc_no": 34,
+      "pc_name": "VIRUDHUNAGAR",
+      "mp_name": "Thiru. B. Manickam Tagore",
+      "party": "INC",
+      "contact": "(04562) 242544",
+      "email": "",
+      "acs": [195, 196]
+    }
+  ],
+  "assembly_constituencies": [
+    {
+      "ac_no": 188,
+      "ac_name": "Melur",
+      "mla_name": "Periyapullan (alias) Selvam P.",
+      "party": "AIADMK",
+      "contact": "",
+      "email": "mlamelur@tn.gov.in"
+    },
+    {
+      "ac_no": 189,
+      "ac_name": "Madurai (East)",
+      "mla_name": "Moorthy P. (Hon. Minister)",
+      "party": "DMK",
+      "contact": "",
+      "email": "mlamaduraieast@tn.gov.in"
+    },
+    {
+      "ac_no": 190,
+      "ac_name": "Sholavandan (SC)",
+      "mla_name": "Venkatesan A.",
+      "party": "DMK",
+      "contact": "",
+      "email": "mlasholavandan@tn.gov.in"
+    },
+    {
+      "ac_no": 191,
+      "ac_name": "Madurai North",
+      "mla_name": "Thalapathi G.",
+      "party": "DMK",
+      "contact": "",
+      "email": "mlamadurainorth@tn.gov.in"
+    },
+    {
+      "ac_no": 192,
+      "ac_name": "Madurai (South)",
+      "mla_name": "Boominathan M.",
+      "party": "DMK",
+      "contact": "",
+      "email": "mlamaduraisouth@tn.gov.in"
+    },
+    {
+      "ac_no": 193,
+      "ac_name": "Madurai (Central)",
+      "mla_name": "Palanivel Thiaga Rajan Dr. (Hon. Minister)",
+      "party": "DMK",
+      "contact": "",
+      "email": "mlamaduraicentral@tn.gov.in"
+    },
+    {
+      "ac_no": 194,
+      "ac_name": "Madurai (West)",
+      "mla_name": "Raju K.",
+      "party": "AIADMK",
+      "contact": "",
+      "email": "mlamaduraiwest@tn.gov.in"
+    },
+    {
+      "ac_no": 195,
+      "ac_name": "Thiruparankundram",
+      "mla_name": "Rajan Chellappa V.V.",
+      "party": "AIADMK",
+      "contact": "",
+      "email": "mlathiruparankundram@tn.gov.in"
+    },
+    {
+      "ac_no": 196,
+      "ac_name": "Thirumangalam",
+      "mla_name": "Udhayakumar R.B.",
+      "party": "AIADMK",
+      "contact": "",
+      "email": "mlathirumangalam@tn.gov.in"
+    },
+    {
+      "ac_no": 197,
+      "ac_name": "Usilampatti",
+      "mla_name": "Ayyappan P.",
+      "party": "AIADMK",
+      "contact": "",
+      "email": "mlausilampatti@tn.gov.in"
+    }
+  ]
+}
