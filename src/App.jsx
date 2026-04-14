@@ -16,6 +16,7 @@ import acDataUrl from './assets/madurai_ac.geojson?url';
 import pcDataUrl from './assets/madurai_pc.geojson?url';
 import repsDataUrl from './assets/representatives.json?url';
 import RepresentativesBottomSheet from './components/RepresentativesBottomSheet';
+import OfflineStatus from './components/OfflineStatus';
 
 function App() {
   const [geojsonData, setGeojsonData] = useState(null);
@@ -396,6 +397,8 @@ function App() {
         mla={selectedReps.mla}
         mp={selectedReps.mp}
       />
+      
+      <OfflineStatus />
     </div>
   );
 }
