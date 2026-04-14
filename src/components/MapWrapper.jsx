@@ -175,9 +175,9 @@ const MapWrapper = ({ geojsonData, acData, pcData, userLocation, focusLocation, 
     <MapContainer 
       center={maduraiCenter} 
       zoom={12} 
-      minZoom={11}
+      minZoom={10}
       maxZoom={18}
-      maxBounds={[[9.75, 77.95], [10.1, 78.3]]}
+      maxBounds={[[9.0, 77.0], [10.5, 78.6]]}
       maxBoundsViscosity={1.0}
       style={{ height: '100%', width: '100%' }}
       zoomControl={false}
