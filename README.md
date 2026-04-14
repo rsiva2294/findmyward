@@ -9,13 +9,15 @@ A premium, interactive web application and civic tool covering all 100 wards of 
 ## ✨ Global Features
 
 - **📍 Instant Ward Detection (GPS)**: High-accuracy geolocation to find your ward in one tap.
+- **📱 Offline Experience (PWA) [NEW]**: Install the app on your home screen. Works seamlessly without an internet connection by caching maps and contacts.
 - **📞 Ward Contacts Directory**: Access a direct directory of officials for every ward, including:
   - **Councillor**: Direct political representation.
-  - **Sanitary Dept**: Inspectors and Supervisors for garbage/cleanliness issues.
+  - **Sanitation Dept**: Inspectors and Supervisors for garbage/cleanliness issues.
   - **Engineering Dept**: AE/JE and Skilled Assistants for road and water repairs.
   - **Revenue Dept**: Bill Collectors for tax queries.
   - **Zone Office**: High-level officials for escalation.
-- **🗳️ MLA & MP Directory [NEW]**: Identify your Member of Legislative Assembly and Member of Parliament based on your ward's location, including direct contact actions.
+- **🗳️ MLA & MP Directory**: Identify your Member of Legislative Assembly and Member of Parliament based on your ward's location, including direct contact actions.
+- **🏛️ Head Office & HQ Support**: Dedicated access to Madurai Corporation Head Office (Arignar Anna Maligai) with quick links for grievances, WhatsApp support, and emergency hotlines.
 - **🧹 Smart Intent Filtering**: Quick-action pills (Garbage, Road, Water, Tax, Zone) that instantly filter the directory to what you need.
 - **🔍 Intelligent Search**: Search through 30,000+ streets and localities in Madurai with real-time suggestions.
 - **🗺️ Interactive Map**: 
@@ -23,7 +25,7 @@ A premium, interactive web application and civic tool covering all 100 wards of 
   - Zone-based color coding for easy identification.
   - Interactive tooltips and high-contrast labels.
   - Boundaries strictly restricted to Madurai city limits.
-- **📱 Mobile-First Experience**: Optimized for all devices with a premium "App-like" feel, including safe-area support and smooth animations.
+- **📱 Mobile-First Experience**: Optimized for all devices with a premium "App-like" feel, including safe-area support and glassmorphism UI.
 
 ## 🚀 Quick Start
 
@@ -37,7 +39,7 @@ A premium, interactive web application and civic tool covering all 100 wards of 
 
 2. **Install dependencies**:
    ```bash
-   npm install
+   npm install --legacy-peer-deps
    ```
 
 3. **Run the development server**:
@@ -56,7 +58,7 @@ npm run build
 - **[React](https://reactjs.org/)**: UI Component Architecture
 - **[Leaflet](https://leafletjs.com/)**: Geospatial Mapping Engine
 - **[Turf.js](https://turfjs.org/)**: Spatial Intelligence & Point-in-Polygon logic
-- **[Vite](https://vitejs.dev/)**: High-performance Build Tooling
+- **[Vite PWA](https://vite-pwa-org.netlify.app/)**: Offline-first service worker & manifest management
 - **[Lucide React](https://lucide.dev/)**: Premium UI Icons
 
 ## 📖 Civic Intelligence
