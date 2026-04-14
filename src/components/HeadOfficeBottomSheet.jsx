@@ -61,7 +61,7 @@ const HeadOfficeBottomSheet = ({ isOpen, onClose, data }) => {
               className={activeTab === 'info' ? 'active' : ''}
               style={{ 
                 flex: 1, 
-                padding: '10px 0', 
+                height: '38px', 
                 fontSize: '13px', 
                 fontWeight: '700',
                 borderRadius: '11px',
@@ -74,18 +74,19 @@ const HeadOfficeBottomSheet = ({ isOpen, onClose, data }) => {
                 justifyContent: 'center',
                 gap: '8px',
                 cursor: 'pointer',
-                transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)'
+                transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                lineHeight: 1
               }}
             >
               <Info size={16} />
-              Quick Info
+              <span style={{ lineHeight: 1 }}>Quick Info</span>
             </button>
             <button 
               onClick={() => setActiveTab('directory')}
               className={activeTab === 'directory' ? 'active' : ''}
               style={{ 
                 flex: 1, 
-                padding: '10px 0', 
+                height: '38px', 
                 fontSize: '13px', 
                 fontWeight: '700',
                 borderRadius: '11px',
@@ -98,11 +99,12 @@ const HeadOfficeBottomSheet = ({ isOpen, onClose, data }) => {
                 justifyContent: 'center',
                 gap: '8px',
                 cursor: 'pointer',
-                transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)'
+                transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                lineHeight: 1
               }}
             >
               <Contact2 size={16} />
-              Directory
+              <span style={{ lineHeight: 1 }}>Directory</span>
             </button>
           </div>
         </div>
