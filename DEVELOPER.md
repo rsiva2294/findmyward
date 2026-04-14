@@ -14,10 +14,11 @@ madurai-findmyward/
 ├── src/
 │   ├── assets/             # Raw data files (GeoJSON, JSON)
 │   ├── components/         # React Components
-│   │   ├── MapWrapper.jsx              # Leaflet map implementation
+│   │   ├── MapWrapper.jsx              # Leaflet map with LayersControl
 │   │   ├── WardSearch.jsx              # Search UI & autocomplete logic
-│   │   ├── WardResultCard.jsx          # Dismissible result overlay
-│   │   └── WardContactsBottomSheet.jsx # Official contact directory & filtering
+│   │   ├── WardResultCard.jsx          # Result overlay with Reps / Contacts trigger
+│   │   ├── WardContactsBottomSheet.jsx # Municipal official directory
+│   │   └── RepresentativesBottomSheet.jsx # [NEW] MLA & MP contact cards
 │   ├── utils/              # Helper functions
 │   │   └── searchHelper.js     # Data flattening & indexing
 │   ├── App.jsx             # Main state orchestration
@@ -40,11 +41,18 @@ The source of truth for ward boundaries.
 A mapped index of 30,000+ streets/localities to ward numbers.
 - **Properties**: `locality_name`, `street_name`, `ward_no`.
 
-### 3. `madurai_all_zones.json` [NEW]
+### 3. `madurai_all_zones.json`
 Official contact directory for all wards and zones.
 - **Wards**: Contains `councillor`, `sanitary`, `engineering`, and `bill_collector` details.
 - **Zones**: Contains high-level zone office officials.
-- **Schema Helper**: Some legacies entries in `councillor_name` contain embedded phone numbers with tabs; the parsing utility in `WardContactsBottomSheet` handles these dynamically.
+
+### 4. `madurai_ac.geojson` & `madurai_pc.geojson` [NEW]
+Optimized boundaries for Assembly and Parliamentary constituencies.
+- **Filtering**: These are strictly filtered to the Madurai region from larger Tamil Nadu datasets (~90% size reduction).
+
+### 5. `representatives.json` [NEW]
+A database of MLAs and MPs mapped to AC and PC numbers.
+- **Fields**: `name`, `party`, `contact`, `email`.
 
 ## 🧠 Core Logic
 
@@ -56,6 +64,12 @@ When a ward is detected, the app performs a lookup in `madurai_all_zones.json`:
 1. **Find Ward**: Matches `ward_no` from GeoJSON properties to the contacts database.
 2. **Resolve Zone**: Extracts the parent zone officials as a fallback.
 3. **Intent Filtering**: Uses a local state in `WardContactsBottomSheet` to filter officials by category (Garbage, Road, etc.), providing a solution-oriented user experience.
+
+### Political Layer Linking (AC/PC) [NEW]
+Since wards are components of larger constituencies, the app uses spatial inference:
+1. **Centroid Analysis**: When a ward is selected, its **Center of Mass** is calculated using Turf.js.
+2. **Spatial Intersect**: The app tests which AC (Assembly) and PC (Parliamentary) polygon contains that point.
+3. **Data Join**: The resulting AC/PC IDs are used to fetch the relevant representative's profile from `representatives.json`.
 
 ### Mobile UI Stacks & Viewports
 To handle mobile clipping:

@@ -15,9 +15,11 @@ A premium, interactive web application and civic tool covering all 100 wards of 
   - **Engineering Dept**: AE/JE and Skilled Assistants for road and water repairs.
   - **Revenue Dept**: Bill Collectors for tax queries.
   - **Zone Office**: High-level officials for escalation.
+- **🗳️ MLA & MP Directory [NEW]**: Identify your Member of Legislative Assembly and Member of Parliament based on your ward's location, including direct contact actions.
 - **🧹 Smart Intent Filtering**: Quick-action pills (Garbage, Road, Water, Tax, Zone) that instantly filter the directory to what you need.
 - **🔍 Intelligent Search**: Search through 30,000+ streets and localities in Madurai with real-time suggestions.
 - **🗺️ Interactive Map**: 
+  - **Multi-Layer Support**: Toggle between Municipal Wards, Assembly Constituencies (AC), and Parliamentary Constituencies (PC).
   - Zone-based color coding for easy identification.
   - Interactive tooltips and high-contrast labels.
   - Boundaries strictly restricted to Madurai city limits.
